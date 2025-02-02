@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button id="addTaskBtn">Add Task</button>
+        <ul id="taskList">
+            <li>
+                <input type="checkbox"> 
+                <span>Buy groceries</span> 
+            </li>
+
+        </ul>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+
+
+addTaskBtn.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+
+    if (taskText === '') {
+        alert('Please enter task');
+        return;
+    }
+
+    console.log(taskText);
+
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const span = document.createElement('span');
+    span.textContent = taskText;
+
+
+    // Log the state of `li` before appending the span
+    console.log('Before appending span:', li.cloneNode(true));
+
+    li.appendChild(checkbox);
+
+    // Log the state of `li` after appending the checkbox
+    console.log('After appending checkbox:', li.cloneNode(true));
+
+    li.appendChild(span);
+
+    // Log the state of `li` after appending the span
+    console.log('After appending span:', li.cloneNode(true));
+
+    
+    taskList.appendChild(li);
+
+    taskInput.value = "";
+})
+
+});
+</script>
+</html>
