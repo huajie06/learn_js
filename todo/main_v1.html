@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Centered Page</title>
+        <style>
+            body {
+                max-width: 600px; /* Adjust width as needed */
+                margin: auto; /* Centers the block */
+                text-align: justify; /* Justifies text left and right */
+                padding: 20px;
+            }
+        </style>
+    </head>
+
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task..." />
+        <button id="addTaskBtn">Add Task</button>
+        <button id="randomAddTaskBtn">Random Task</button>
+        <br>
+        <br>
+        <button id="runClearTask">Clear Tasks</button>
+        <button id="runLoadTask">Load Tasks</button>
+        <button id="runSaveTask">Save Tasks</button>
+        <ul id="taskList">
+            <li id="sample-task-01">
+                <!-- <button>del</button> <span>DO some work stuff.</span>  -->
+                Do some work stuff
+            </li>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div class="todo2">
+        <button id="button2">
+            Display Some Value
+        </button>
+        <div id="displayValueArea"></div>
+    </div>
+    <script>
+
+
+
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const randomAddTaskBtn = document.getElementById('randomAddTaskBtn');
+        const loadTaskBtn = document.getElementById('runLoadTask');
+        const runClearTask = document.getElementById('runClearTask');
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+
+        runClearTask.addEventListener('click', ()=>{
+            // const li = document.createElement('li');
+            // li.textContent = 'Do some random work stuff';
+
+            // taskList.replaceChildren(li);
+            taskList.innerHTML = '';
+        })
+
+
+        randomAddTaskBtn.addEventListener('click', () => {
+            const randomTask = [
+                'Do laundry',
+                'Take out trash',
+                'Clean basement',
+                'Go for 1 hr run',
+                'Some other workout',
+                'Need to go grocery',
+            ];
+
+            const randomElement = randomTask[Math.floor(Math.random() * randomTask.length)];
+            const li = document.createElement('li');
+            li.textContent = randomElement;
+
+            taskList.appendChild(li);
+        });
+
+        addTaskBtn.addEventListener('click', () => {
+            addTasks();
+        });
+
+        function addTasks() {
+            const li = document.createElement('li');
+            li.textContent = taskInput.value.trim();
+
+            taskList.appendChild(li);
+            taskInput.value = '';
+        }
+
+        const saveTask = document.getElementById('runSaveTask');
+
+        saveTask.addEventListener('click', () => {
+            saveTaskFunc();
+        });
+
+        function saveTaskFunc() {
+            const ul = document.getElementById('taskList');
+            const li = ul.querySelectorAll('li');
+
+            const tasks = [];
+
+            li.forEach((taskItem) => {
+                tasks.push(taskItem.textContent.trim());
+            });
+
+            console.log(tasks);
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        loadTaskBtn.addEventListener('click', () =>{
+            loadTask();
+        })
+        function loadTask() {
+            tasks = JSON.parse(localStorage.getItem('tasks'));
+            console.log(tasks);
+            
+            taskList.innerHTML="";
+
+            tasks.forEach((taskItem) =>{
+                const li = document.createElement('li');
+                li.textContent = taskItem;
+                taskList.appendChild(li);
+            });
+        }
+
+
+
+
+        localStorage.setItem('username', 'John');
+        const username = localStorage.getItem('username');
+
+        console.log(username);
+    </script>
+</html>
