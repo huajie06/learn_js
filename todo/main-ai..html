@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>To-Do List</title>
+        <style>
+            .completed {
+                text-decoration: line-through;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task" />
+        <button id="addTaskButton">Add Task</button>
+        <ul id="taskList"></ul>
+
+        <button id="clearLocalStorage">clear local storage</button>
+        <button id="displayLocalStorage">display local storage</button>
+        <script>
+            const taskInput = document.getElementById('taskInput');
+            const addTaskButton = document.getElementById('addTaskButton');
+            const taskList = document.getElementById('taskList');
+
+            const clearLocalStorage = document.getElementById('clearLocalStorage');
+
+            clearLocalStorage.addEventListener('click', () => {
+                localStorage.setItem('tasks', '');
+                const ul = document.getElementById('taskList')
+                ul.innerHTML = '';
+            });
+
+            const displayLocalStorage = document.getElementById('displayLocalStorage');
+
+            displayLocalStorage.addEventListener('click', () => {
+                console.log(localStorage.getItem('tasks'));
+            });
+
+            const loadTasks = () => {
+                const tasksString = localStorage.getItem('tasks');
+                if (!tasksString || tasksString.trim() === '') {
+                    // If tasksString is null, undefined or empty, use an empty array
+                    tasks = [];
+                } else {
+                    //attempt to parse
+                    try {
+                        tasks = JSON.parse(tasksString);
+                    } catch (err) {
+                        console.log(`ERROR: ${err.message}`);
+                        // If tasksString is not valid JSON, use an empty array or log error
+                        tasks = [];
+                    }
+                }
+                tasks.forEach((task) => addTaskToDOM(task.text, task.completed));
+            };
+
+            const saveTasks = () => {
+                const tasks = [];
+                taskList.querySelectorAll('li').forEach((taskItem) => {
+                    tasks.push({
+                        text: taskItem.textContent,
+                        completed: taskItem.classList.contains('completed'),
+                    });
+                });
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            };
+
+            const addTaskToDOM = (taskText, completed = false) => {
+                const taskItem = document.createElement('li');
+                taskItem.textContent = taskText;
+                if (completed) {
+                    taskItem.classList.add('completed');
+                }
+                taskItem.addEventListener('click', () => {
+                    taskItem.classList.toggle('completed');
+                    saveTasks();
+                });
+                taskItem.addEventListener('dblclick', () => {
+                    taskItem.remove();
+                    saveTasks();
+                });
+                taskList.appendChild(taskItem);
+            };
+
+            addTaskButton.addEventListener('click', () => {
+                const taskText = taskInput.value.trim();
+                if (taskText) {
+                    addTaskToDOM(taskText);
+                    saveTasks();
+                    taskInput.value = '';
+                }
+            });
+
+            loadTasks();
+        </script>
+    </body>
+</html>

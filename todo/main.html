@@ -28,44 +28,37 @@
     <hr />
 
     <div class="todo2">
-        <button id="button2" onclick="displayValue();">
-            Display Some Value
-        </button>
-        <div id="displayValueArea">
-        </div>
+        <button id="button2" onclick="displayValue();">Display Some Value</button>
+        <div id="displayValueArea"></div>
     </div>
     <script>
+        localStorage.setItem('username', 'John');
+        const username = localStorage.getItem('username');
 
-		localStorage.setItem('username', 'John');
-		const username = localStorage.getItem('username');
-
-		
-		console.log(username); 
+        console.log(username);
 
         function displayValue() {
-			const displayValueArea = document.getElementById('displayValueArea');
+            const displayValueArea = document.getElementById('displayValueArea');
 
-			// displayValueArea.textContent = 10;
+            // displayValueArea.textContent = 10;
 
-			const timestamp = Date.now(); // Get current timestamp
-			const date = new Date(timestamp); 
-			const isoString = date.toISOString(); 
+            const timestamp = Date.now(); // Get current timestamp
+            const date = new Date(timestamp);
+            const isoString = date.toISOString();
 
-			displayValueArea.innerHTML = isoString + '<br><br>';
+            displayValueArea.innerHTML = isoString + '<br><br>';
 
             for (i = 1; i < 5; i++) {
                 console.log(`ha: ${i} !`);
 
-				// displayValueArea.textContent += `ha: ${i}!\n`;
-				displayValueArea.innerHTML += `ha: ${i} !<br>`;
+                // displayValueArea.textContent += `ha: ${i}!\n`;
+                displayValueArea.innerHTML += `ha: ${i} !<br>`;
             }
-
-
         }
 
         function onRemoveLi() {
             const sampleTask = document.getElementById('sample-task-01');
-			const sampleSpan = sampleTask.querySelectorAll('span')[0];
+            const sampleSpan = sampleTask.querySelectorAll('span')[0];
 
             if (sampleSpan) {
                 sampleSpan.onclick = () => sampleTask.remove();
@@ -91,10 +84,7 @@
                 let taskText = taskInput.value.trim();
 
                 if (taskText === '') {
-                    const randomElement =
-                        randomTask[
-                            Math.floor(Math.random() * randomTask.length)
-                        ];
+                    const randomElement = randomTask[Math.floor(Math.random() * randomTask.length)];
                     // alert('Some random task will be assigned');
                     taskText = randomElement;
                 }
