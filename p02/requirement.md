@@ -53,3 +53,27 @@ When you share your solution, I’ll check:
 - Correct use of .map() and .reduce()
 - Immutability (not modifying original objects)
 - Clean, readable chains
+
+## for product_v4.js
+
+▶️ Next Step: Error Handling in Chains & Real-World Edge Cases 
+
+Now that you’re comfortable with chaining, let’s add robustness: 
+
+    What if a product is missing price?
+    What if the array is empty?
+    How to make chains safe and debuggable?
+     
+
+But first—would you like to try a small challenge to lock this in? 
+💡 Mini-Challenge (Optional): 
+
+Write a single chain that: 
+
+    Takes the original products
+    Applies a 15% discount only to expensive items
+    Returns an array of their updated plain summaries
+     
+
+    Hint: You’ll need .map() with a conditional inside. 
+     
