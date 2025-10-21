@@ -71,3 +71,24 @@ applyDiscountToAllInPlace(products, 10);
 products
   .filter(p => p.isExpensive === true)
   .forEach(p =>p.printInfo());
+
+function getProductSummaries(products){
+    const newProducts = products.map(
+        x => ({type: x.type, origin: x.origin, price: x.price, isExpensive: x.isExpensive})
+    );
+    return newProducts;
+}
+
+console.log(getProductSummaries(products));
+
+function getTotalValue(products){
+    const totalValue = products.reduce((acc, current) => acc + current.price, 0);
+    return totalValue;
+}
+console.log(getTotalValue(products));
+
+const totalExpensiveValue = getProductSummaries(products)
+  .filter(p => p.isExpensive)
+  .reduce((acc, p) => acc + p.price, 0);
+
+console.log('Total value of expensive items:', totalExpensiveValue);
