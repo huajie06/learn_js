@@ -132,7 +132,7 @@ function fetchWithRetry1(url, maxRetries) {
       }
       return response;
     } catch (error) {
-      if (attempt > makeRequest) {
+      if (attempt > maxRetries) {
         throw new Error(`failed after attempts ${attempt}, error: ${error}`);
       }
 

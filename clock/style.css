@@ -1,0 +1,76 @@
+body {
+    background-color: #1e1e2e; /* The dark background from your image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.clock {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    border-radius: 50%;
+    /* Optional: a subtle shadow to make it pop */
+    box-shadow: 0 0 30px rgba(0,0,0,0.2); 
+}
+
+/* Common styles for all hands */
+.hand {
+    position: absolute;
+    bottom: 50%; /* Anchor at the center vertically */
+    left: 50%;   /* Anchor at the center horizontally */
+    transform-origin: bottom center; /* Pivot point is the bottom of the bar */
+    border-radius: 10px; /* Rounded tips */
+    z-index: 10;
+}
+
+.center-dot {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20; /* Sits on top of everything */
+}
+
+
+.tick {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3); /* Faint white */
+    transform-origin: center;
+}
+
+.major-tick {
+    height: 12px;
+    width: 4px;
+    background: #fff; /* Bright white */
+}
+
+.minor-tick {
+    height: 6px;
+}
+
+.number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* Center the number perfectly on its coordinate */
+    width: 30px; 
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: -15px; /* Half of width */
+    margin-top: -15px; /* Half of height */
+}
